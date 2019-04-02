@@ -1,0 +1,38 @@
+To start Flask:
+
+enter your virtualenv
+
+source venv/bin/activate
+
+export FLASK_DEBUG=1
+
+flask run
+
+API should respond to these curl commands
+
+curl 127.0.0.1:5000
+
+curl 127.0.0.1:5000/api/price/aapl
+
+curl 127.0.0.1:5000/api/0123456789abcde/balance
+
+curl 127.0.0.1:5000/api/0123456789abcde/positions
+
+curl -H "Content-Type: application/json" -X PUT -d '{"amount": 100.0}' http://127.0.0.1:5000/api/0123456789abcde/deposit
+
+# TODO:
+
+curl 127.0.0.1:5000/api/0123456789abcde/position_for/tsla
+
+curl 127.0.0.1:5000/api/0123456789abcde/trades
+
+curl 127.0.0.1:5000/api/0123456789abcde/trades_for/tsla
+
+# buy should return a response with the username, the balance, and the position for that stock
+
+curl -H "Content-Type: application/json" -X POST -d '{"ticker": "tsla", "amount": 1}' http://127.0.0.1:5000/api/0123456789abcde/buy
+
+# sell should return a response with the username, the balance, and the position for that stock
+
+curl -H "Content-Type: application/json" -X POST -d '{"ticker": "tsla", "amount": 1}' http://127.0.0.1:5000/api/0123456789abcde/sell
+

@@ -12,7 +12,6 @@ BAD_REQUEST = {"error": "bad request", "status_code": 400}
 def error404(e):
     return jsonify(NOT_FOUND), 404
 
-
 @app.errorhandler(500)
 def error500(e):
     return jsonify(APP_ERROR), 500
