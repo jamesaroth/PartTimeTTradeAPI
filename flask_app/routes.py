@@ -20,7 +20,7 @@ def error500(e):
 def root():
     return jsonify({"name": "API Trader"})
 
-@app.route('/api/price/<ticker>')
+@app.route('/api/price/<ticker>', methods=['GET'])
 def price(ticker):
     try:
         price = util.get_price(ticker)
@@ -28,14 +28,14 @@ def price(ticker):
         return jsonify(NOT_FOUND), 404
     return jsonify({"ticker": ticker, "price": price})
 
-@app.route('/api/<api_key>/balance')
+@app.route('/api/<api_key>/balance', methods=['GET'])
 def balance(api_key):
     account = Account.api_authenticate(api_key)
     if not account:
         return jsonify(UNAUTHORIZED), 401
     return jsonify({"username": account.username, "balance": account.balance})
 
-@app.route('/api/<api_key>/positions')
+@app.route('/api/<api_key>/positions', methods=['GET'])
 def positions(api_key):
     account = Account.api_authenticate(api_key)
     if not account:
@@ -44,7 +44,7 @@ def positions(api_key):
     json_list = [position.json() for position in positions]
     return jsonify({"username": account.username, "positions": json_list})
 
-@app.route('/api/<api_key>/position_for/<ticker>')
+@app.route('/api/<api_key>/position_for/<ticker>', methods=['GET'])
 def position_for(api_key, ticker):
     account = Account.api_authenticate(api_key)
     if not account:
@@ -52,7 +52,7 @@ def position_for(api_key, ticker):
     position = account.get_position_for(ticker)
     return jsonify({"username": account.username, "positions": position.json()})
 
-@app.route('/api/<api_key>/trades')
+@app.route('/api/<api_key>/trades', methods=['GET'])
 def trades(api_key):
     account = Account.api_authenticate(api_key)
     if not account:
@@ -61,7 +61,7 @@ def trades(api_key):
     json_list = [trade.json() for trade in trades]
     return jsonify({"username": account.username, "trades": json_list})
 
-@app.route('/api/<api_key>/trades_for/<ticker>')
+@app.route('/api/<api_key>/trades_for/<ticker>', methods=['GET'])
 def trades_for(api_key, ticker):
     account = Account.api_authenticate(api_key)
     if not account:

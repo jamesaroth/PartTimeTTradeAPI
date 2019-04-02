@@ -1,4 +1,5 @@
 import sys
+import os
 import requests
 from app import view
 from app import util
@@ -32,6 +33,8 @@ def login_menu():
         
 def main_menu_ctrl(user):
     while True:
+        input()
+        os.system("clear")
         answer = view.main_menu(user.username)
         if int(answer) == 9:
             view.program_end()
